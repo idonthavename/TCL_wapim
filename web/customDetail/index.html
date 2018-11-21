@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TCL</title>
+  <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="css/styles.min.css">
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="js/init.js"></script>
+</head>
+<body>
+<div class="cust-main">
+  <!-- head html satrt -->
+  <div class="header">
+    <div class="user-img">
+      <img src="" class="J-UserImg" />
+    </div>
+    <div class="user-info font26 J-UserName"></div>
+    <div class="user-info font22 J-Skilles"></div>
+    <div class="collect font22 sizing">
+      <div class="sizing">
+        <p>共服务了</p>
+        <span class="J-ServiceCount"></span>
+      </div>
+      <div class="sizing">
+        <p>好评率</p>
+        <span class="red J-Evaluationpercent"></span>
+      </div>
+      <div class="sizing">
+        <p>服务时长</p>
+        <span class="J-ServiceTime"></span>
+      </div>
+    </div>
+  </div>
+  <!-- @head end -->
+
+  <!--  -->
+  <div class="assess padd font20">
+    <h3>评价星级</h3>
+    <ul class="font20">
+      <li>
+        <div class="left">5星 (无可挑剔)</div>
+        <div class="center J-Assess"><span class="red J-EvalWid5"></span></div>
+        <div class="right J-Eval5"></div>
+      </li>
+      <li>
+        <div class="left">4星 (挺好哒)</div>
+        <div class="center"><span class="red J-EvalWid4"></span></div>
+        <div class="right J-Eval4"></div>
+      </li>
+      <li>
+        <div class="left">3星 (还行)</div>
+        <div class="center"><span class="red J-EvalWid3"></span></div>
+        <div class="right J-Eval3"></div>
+      </li>
+      <li>
+        <div class="left">2星 (不开心)</div>
+        <div class="center"><span class="red J-EvalWid2"></span></div>
+        <div class="right J-Eval2"></div>
+      </li>
+      <li>
+        <div class="left">1星 (忍无可忍)</div>
+        <div class="center"><span class="red J-EvalWid1"></span></div>
+        <div class="right J-Eval1">2</div>
+      </li>
+    </ul>
+  </div>
+  <!--  -->
+  <div class="assess font20">
+    <h3>大家对她的印象</h3>
+    <div class="asse-list J-AsseList">
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null;
+  }
+  var customerName = getQueryString('customer');
+  var cusurl = 'http://10.4.62.41:8080/weChatAdapter/transfer/getIVRAgent';
+  GetCustomer(customerName);
+  function GetCustomer(name){
+    $.ajax({
+      url: cusurl,
+      type: 'GET',
+      data: {'name': name},
+      success: function(data){
+          
+        var obj = JSON.parse(data);
+        if (obj.success) {
+          var r = obj.result,
+              w = $('.J-Assess').width(),
+              imgpath = 'http://10.4.62.41:8089/upload/photo/',
+              //imgpath = 'http://10.4.28.69:8089/upload/photo/',
+              evaluation = parseInt(r.evaluation1)+parseInt(r.evaluation2)+parseInt(r.evaluation3)+parseInt(r.evaluation4)+parseInt(r.evaluation5);
+          showcusflag = false;
+          var html = '',
+              o = r.labels,
+              reg1 = new RegExp(',','g'),
+              reg2 = new RegExp('"','g'),
+              str = JSON.stringify(r.skilles);
+
+          if (o && o.length>0) {
+            o.map(function(item, index){
+              html += '<div>'+item+'</div>';
+            });
+          };
+          
+          str = str.split('[')[1];
+          str = str.split(']')[0];
+          str = str.replace(reg1,'、');
+          str = str.replace(reg2,'');
+          $('.J-UserImg').attr('src', imgpath+r.image);
+          $('.J-UserName').text(r.displayname);
+          $('.J-Skilles').text('技能：'+str);
+          $('.J-ServiceCount').text(r.serviceCount +'人');
+          $('.J-Evaluationpercent').text(r.evaluationpercent);
+          $('.J-ServiceTime').text(r.serviceTime + '分钟');
+          $('.J-AsseList').html(html);
+          $('.J-Eval5').text(((r.evaluation5/evaluation)*100).toFixed(0)+'%');
+          $('.J-EvalWid5').css('width', parseInt(r.evaluation5)/evaluation*w);
+          $('.J-Eval4').text(((r.evaluation4/evaluation)*100).toFixed(0)+'%');
+          $('.J-EvalWid4').css('width', parseInt(r.evaluation4)/evaluation*w);
+          $('.J-Eval3').text(((r.evaluation3/evaluation)*100).toFixed(0)+'%');
+          $('.J-EvalWid3').css('width', parseInt(r.evaluation3)/evaluation*w);
+          $('.J-Eval2').text(((r.evaluation2/evaluation)*100).toFixed(0)+'%');
+          $('.J-EvalWid2').css('width', parseInt(r.evaluation2)/evaluation*w);
+          $('.J-Eval1').text(((r.evaluation1/evaluation)*100).toFixed(0)+'%');
+          $('.J-EvalWid1').css('width', parseInt(r.evaluation1)/evaluation*w);
+        }else{
+          alert('获取客服信息异常');
+        }
+      },
+      error: function(err){
+        alert('获取客服信息异常');
+        //console.log('err', err);
+      }
+    });
+  }
+</script>
+</body>
+</html>
+
+
+
+
+
+

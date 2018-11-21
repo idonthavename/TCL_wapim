@@ -1,0 +1,145 @@
+html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, h1, h2, h3, h4, h5, h6, video {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    color: #666;
+    margin: 0 auto;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+	font-family: 'Microsoft Yahei',Arial;
+    background-color: #FFF;
+}
+
+li{
+	float: left;
+}
+
+a { 
+    text-decoration: none;
+    color: #333;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+ul, li, a, input, select, label, button {
+    outline: none;
+    list-style: none;
+}
+
+table {
+    border: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table td {
+    padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, main {
+    display: block;
+}
+
+input:disabled, button:disabled {
+    background: #ddd !important;
+    color: #808080!important;
+    border-color: transparent!important;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill {
+    background: none !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    box-shadow: 0 0 0px 1000px white inset;
+}
+
+input, textarea, a, button {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, b {
+    font-weight: normal;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -o-appearance: button;
+    -ms-appearance: button;
+    appearance: button;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: "Hiragino Sans GB", "Microsoft Yahei", Lato, Arial, sans-serif;
+}
+
+input[type="text"], textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    text-indent: 12px;
+}
+
+@font-face {
+  font-family: 'iconfont';
+  src: url('iconfont/iconfont.eot');
+  src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('iconfont/iconfont.woff') format('woff'),
+  url('iconfont/iconfont.ttf') format('truetype'),
+  url('iconfont/iconfont.svg#iconfont') format('svg');
+}
+
+.iconfont{
+  font-family: "iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.clearfloat:before {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.sizing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms--box-sizing: border-box;
+    -o-box-sizing: border-box;
+    sizing: border-box;
+}
